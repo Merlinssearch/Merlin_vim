@@ -356,9 +356,9 @@ config.font = wezterm.font('FiraCode Nerd Font')
 ## 4. Test Installation
 
 Icons should display correctly in:
-- Powerlevel10k prompts
-- File managers with icons
-- Status bars and dev tools
+- Powerlevel10k prompts (a theme from oh my zsh for nice terminal with zsh)
+- File managers with icons (like yazi)
+- Status bars and dev tools 
 
 ## Troubleshooting
 
