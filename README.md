@@ -1,6 +1,14 @@
-# Neovim Development Setup - Installation Guide (Arch Linux)
+# Neovim Development Setup - Installation Guide 
 
 A modern Neovim configuration built on NvChad with LSP, formatting, linting, and syntax highlighting support for multiple programming languages.
+
+# My Neovim Setup
+
+**My Setup**: Arch Linux
+
+Should work on any Linux distro if not and u found a solution post it in ISSUES so other profit from it too (some may have old Nvim versions - consider building from source if something doesn't work). Should maybe work with Brew on macOS too.
+
+I also managed to use PowerShell with WSL to get Nvim running on Windows(spend too much time with , just use VisualStudio with vim motion . Not worth the time no system clipboard wokrig for me xD ).
 
 ## Prerequisites
 
@@ -256,3 +264,94 @@ nvim -c "Lazy update" -c "qa"
 # Update Mason packages
 nvim -c "MasonUpdate" -c "qa"
 ```
+# Nerd Fonts Installation Guide
+
+Nerd Fonts are patched fonts with extra icons and glyphs for programming and terminals.
+
+## 1. Choose & Download
+
+Visit [nerdfonts.com/font-downloads](https://www.nerdfonts.com/font-downloads) and pick a font:
+- **FiraCode Nerd Font** - Popular with ligatures
+- **JetBrains Mono Nerd Font** - Clean and modern  
+- **Hack Nerd Font** - Classic monospace
+
+Download the `.zip` file and extract all `.ttf` files.
+
+## 2. Install Fonts
+
+### Linux
+```bash
+mkdir -p ~/.local/share/fonts
+cp *.ttf ~/.local/share/fonts/
+fc-cache -fv
+```
+
+### macOS
+```bash
+# Double-click font files or use command:
+open *.ttf
+```
+Then click "Install Font" in Font Book.
+
+### Windows
+Right-click font files → "Install" or "Install for all users"
+
+## 3. Configure Terminal
+
+### GUI Method
+Most terminals: **Preferences** → **Font/Appearance** → Select your Nerd Font
+
+### Config Files
+
+**Kitty** (`~/.config/kitty/kitty.conf`):
+```
+font_family FiraCode Nerd Font
+```
+
+**Alacritty** (`~/.config/alacritty/alacritty.yml`):
+```yaml
+font:
+  normal:
+    family: FiraCode Nerd Font
+```
+
+**Windows Terminal** (`settings.json`):
+```json
+"fontFace": "FiraCode Nerd Font"
+```
+
+**iTerm2** (macOS): Preferences → Profiles → Text → Font
+
+**GNOME Terminal**: Preferences → Profile → Text → Custom font
+
+**Konsole** (KDE): Settings → Edit Current Profile → Appearance → Font
+
+**Hyper** (`~/.hyper.js`):
+```js
+fontFamily: 'FiraCode Nerd Font'
+```
+
+**Wezterm** (`~/.wezterm.lua`):
+```lua
+config.font = wezterm.font('FiraCode Nerd Font')
+```
+
+**Terminator** (`~/.config/terminator/config`):
+```ini
+[profiles]
+  [[default]]
+    font = FiraCode Nerd Font 12
+```
+
+## 4. Test Installation
+
+Icons should display correctly in:
+- Powerlevel10k prompts
+- File managers with icons
+- Status bars and dev tools
+
+## Troubleshooting
+
+- **Linux**: Check installation with `fc-list | grep "Nerd"`
+- **All platforms**: Restart terminal after installation
+- Verify exact font name in system settings
