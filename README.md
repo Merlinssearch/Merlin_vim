@@ -84,6 +84,25 @@ mv ~/.local/share/nvim ~/.local/share/nvim.backup
 mv ~/.local/state/nvim ~/.local/state/nvim.backup
 mv ~/.cache/nvim ~/.cache/nvim.backup
 ```
+# About `~/.local/state/nvim`
+
+Neovim stores **runtime data** in `~/.local/state/nvim`. This includes:
+
+- Undo files (undo changes after closing)
+- Swap files (crash protection)
+- Temporary session or plugin data
+
+It follows the [XDG spec](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html):
+
+- Config in `~/.config/nvim`
+- Data in `~/.local/share/nvim`
+- Runtime state in `~/.local/state/nvim`
+- Cache in `~/.cache/nvim`
+
+Backing up this folder preserves undo history and session info.
+
+---
+
 
 ### 2. Clone the Configuration
 ```bash
