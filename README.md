@@ -185,7 +185,7 @@ The following should be installed automatically:
 
 ## Key Features
 
-- **Theme:** Catppuccin with transparency enabled
+- **Theme:** Catppuccin with transparency enabled (make sure Terminal Emulator has transparency also enabled , also Font related thinks like Nerd Fonts should be used by terminal)
 - **Auto-formatting:** Format on save for all supported languages
 - **Intelligent linting:** Language-specific linters with error checking
 - **LSP integration:** Auto-completion, go-to-definition, diagnostics
