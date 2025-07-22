@@ -114,7 +114,7 @@ git clone <your-repo-url> ~/.config/nvim
 ```
 
 ### 3. Directory Structure Verification
-Ensure your `~/.config/nvim` directory has this structure:
+Ensure your `~/.config/nvim` directory has this structure (my Structure is bad but worked) :
 ```
 ~/.config/nvim/
 ├── init.lua
