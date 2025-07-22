@@ -14,7 +14,7 @@ I also managed to use PowerShell with WSL to get Nvim running on Windows (spent 
 
 Different Linux distros use different package managers, but they work similarly. Just replace `pacman` with your distro's package manager and the appropriate flags. Here's the conversion:
 
-- **Arch/Manjaro**: `pacman -S package_name`
+- **Arch/Manjaro**: `pacman -S package_name` <--- Arch is the best by the way <3 
 - **Ubuntu/Debian**: `apt install package_name` 
 - **Fedora/RHEL**: `dnf install package_name`
 - **openSUSE**: `zypper install package_name`
