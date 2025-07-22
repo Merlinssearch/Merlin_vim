@@ -2,13 +2,23 @@
 
 A modern Neovim configuration built on NvChad with LSP, formatting, linting, and syntax highlighting support for multiple programming languages.
 
-# My Neovim Setup
-
 **My Setup**: Arch Linux
 
-Should work on any Linux distro if not and u found a solution post it in ISSUES so other profit from it too (some may have old Nvim versions - consider building from source if something doesn't work). Should maybe work with Brew on macOS too.
+Should work on any Linux distro. If not and you found a solution, post it in ISSUES so others can profit from it too! 
 
-I also managed to use PowerShell with WSL to get Nvim running on Windows(spend too much time with , just use VisualStudio with vim motion . Not worth the time no system clipboard wokrig for me xD ).
+Some distros may have old Nvim versions - consider building from source if something doesn't work. Should maybe work with Brew on macOS too.
+
+I also managed to use PowerShell with WSL to get Nvim running on Windows (spent too much time with it though - just use Visual Studio with vim motion. Not worth the time, no system clipboard working for me xD).
+
+# Package Manager Quick Reference
+
+Different Linux distros use different package managers, but they work similarly. Just replace `pacman` with your distro's package manager and the appropriate flags. Here's the conversion:
+
+- **Arch/Manjaro**: `pacman -S package_name`
+- **Ubuntu/Debian**: `apt install package_name` 
+- **Fedora/RHEL**: `dnf install package_name`
+- **openSUSE**: `zypper install package_name`
+- **Alpine**: `apk add package_name`
 
 ## Prerequisites
 
