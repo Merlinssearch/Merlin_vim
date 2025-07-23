@@ -1,4 +1,4 @@
-# Merlin's Neovim Configuration(not finished i need more sleep)
+# Merlin's Neovim Configuration
 
 A modern Neovim configuration built on NvChad with LSP, formatting, linting, and syntax highlighting support for multiple programming languages.
 
@@ -42,22 +42,26 @@ On first launch, plugins will automatically install. This may take a few minutes
 - **Neovim** 0.9+ (latest stable recommended)
 - **Git** (for plugin management)
 - **Node.js & npm** (for LSP servers)
+- **Python & pip** (for Python-based tools)
+- **Rust** (for some formatters and tools)
+- **Clipboard support** (xclip for X11, wl-clipboard for Wayland)
 - **A Nerd Font** (for icons, see [Nerd Fonts section](#-nerd-fonts))
 
 ### Install Core Dependencies
 
 ```bash
-# Arch Linux
-sudo pacman -S neovim git nodejs npm python python-pip rust
+# Arch Linux / Manjaro
+sudo pacman -S --needed neovim unzip luarocks xclip wl-clipboard git nodejs npm python python-pip rust
 
 # Ubuntu/Debian
-sudo apt update && sudo apt install neovim git nodejs npm python3 python3-pip rustc cargo
+sudo apt update && sudo apt install neovim unzip git nodejs npm python3 python3-pip rustc cargo xclip wl-clipboard
 
 # Fedora
-sudo dnf install neovim git nodejs npm python3 python3-pip rust cargo
+sudo dnf install neovim unzip git nodejs npm python3 python3-pip rust cargo xclip wl-clipboard
 
 # macOS
 brew install neovim git node python rust
+# Note: Clipboard tools not needed on macOS
 ```
 
 ## 🛠️ Language Support
@@ -100,7 +104,11 @@ sudo dnf install clang clang-tools-extra
 
 #### Lua Development
 ```bash
+# Install via Cargo (requires Rust)
 cargo install stylua
+
+# Or install luacheck via luarocks
+luarocks install --local luacheck
 ```
 
 #### JavaScript/TypeScript Development
@@ -262,6 +270,12 @@ If tools fail to install for unused languages:
 3. Press `X` to uninstall them
 4. Or comment out their configurations
 
+#### Clipboard Issues
+If copy/paste doesn't work:
+- **X11**: Ensure `xclip` is installed
+- **Wayland**: Ensure `wl-clipboard` is installed
+- Test with `:checkhealth` for clipboard support
+
 ### Getting Help
 
 - `:help` - General Neovim help
@@ -300,14 +314,14 @@ nvim -c "Lazy update" -c "qa"
 nvim -c "MasonUpdate" -c "qa"
 
 # Update configuration (pull from git)
-cd ~/.config/nvim && git pull  <-- dont do this without lookin in the Repo for changes u dont like
+cd ~/.config/nvim && git pull  # <-- dont do this without looking in the repo for changes you dont like
 ```
 
 ## 🎯 Minimal Setup
 
 For a lightweight setup with only Lua support (perfect for Neovim config editing):
 
-1. Install: `neovim`, `git`, `nodejs`, `npm`, `rust`
+1. Install: `neovim`, `git`, `nodejs`, `npm`, `rust`, `unzip`, `luarocks`
 2. Install stylua: `cargo install stylua`
 3. Comment out all other languages in config files
 4. Launch Neovim
@@ -327,6 +341,7 @@ This configuration is open source. Feel free to use and modify as needed.
 - [Mason](https://github.com/williamboman/mason.nvim) - Tool installer
 - [Catppuccin](https://github.com/catppuccin/nvim) - Color scheme
 - [ProgrammingRainbow](https://github.com/ProgrammingRainbow/NvChad-2.5/tree/main) - nice NvChad config
+
 ---
 
 **Tested on**: Arch Linux  
