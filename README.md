@@ -297,7 +297,7 @@ nvim -c "Lazy update" -c "qa"
 nvim -c "MasonUpdate" -c "qa"
 
 # Update configuration (pull from git)
-cd ~/.config/nvim && git pull
+cd ~/.config/nvim && git pull  <-- dont do this without lookin in the Repo for changes u dont like
 ```
 
 ## 🎯 Minimal Setup
