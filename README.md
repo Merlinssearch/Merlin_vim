@@ -10,6 +10,93 @@ Some distros may have old Nvim versions - consider building from source if somet
 
 I also managed to use PowerShell with WSL to get Nvim running on Windows (spent too much time with it though - just use Visual Studio with vim motion. Not worth the time, no system clipboard working for me xD).
 
+## ⚠️ IMPORTANT: Plugin Management
+
+**If you don't plan to use certain languages or tools, you MUST comment out the corresponding plugins and configurations to avoid errors!**
+
+### Example: Removing Go Support
+If you don't use Go, comment out these lines in the respective files:
+
+**In `lua/configs/lspconfig.lua`:**
+```lua
+-- Remove "gopls" from the servers list
+lspconfig.servers = {
+    "lua_ls",
+    "clangd",
+    -- "gopls",  -- Comment out if not using Go
+    "ols",
+    "pyright",
+    "ts_ls",
+    "html",
+    "cssls",
+}
+
+-- Comment out the entire gopls setup block
+--[[
+lspconfig.gopls.setup({
+    on_attach = create_on_attach_no_formatting(),
+    on_init = on_init,
+    capabilities = capabilities,
+    cmd = { "gopls" },
+    filetypes = { "go", "gomod", "gotmpl", "gowork" },
+    root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+    settings = {
+        gopls = {
+            analyses = {
+                unusedparams = true,
+            },
+            completeUnimported = true,
+            usePlaceholders = true,
+            staticcheck = true,
+        },
+    },
+})
+--]]
+```
+
+**In `lua/configs/conform.lua`:**
+```lua
+formatters_by_ft = {
+    lua = { "stylua" },
+    c = { "clang-format" },
+    cpp = { "clang-format" },
+    -- go = { "gofumpt", "goimports-reviser", "golines" },  -- Comment out
+    python = { "isort", "black" },
+    typescript = { "prettier" },
+    javascript = { "prettier" },
+    html = { "prettier" },
+    css = { "prettier" },
+},
+```
+
+**In `lua/configs/treesitter.lua`:**
+```lua
+ensure_installed = {
+    "bash",
+    "c",
+    "cmake",
+    "cpp",
+    "fish",
+    -- "go",      -- Comment out these
+    -- "gomod",
+    -- "gosum", 
+    -- "gotmpl",
+    -- "gowork",
+    "lua",
+    "luadoc",
+    -- ... rest of languages
+},
+```
+
+### Languages You Can Safely Remove
+Comment out configurations for languages you don't use:
+- **Go**: gopls, go formatters, go treesitter parsers
+- **Python**: pyright, black/isort formatters, flake8 linter
+- **C/C++**: clangd, clang-format
+- **JavaScript/TypeScript**: ts_ls, prettier, eslint_d
+- **HTML/CSS**: html/cssls servers, prettier
+- **Odin**: ols server, odin treesitter parser
+
 # Package Manager Quick Reference
 
 Different Linux distros use different package managers, but they work similarly. Just replace `pacman` with your distro's package manager and the appropriate flags. Here's the conversion:
@@ -19,7 +106,7 @@ Different Linux distros use different package managers, but they work similarly.
 - **Fedora/RHEL**: `dnf install package_name`
 - **openSUSE**: `zypper install package_name`
 - **Alpine**: `apk add package_name`
-- **macOS**: `brew install package_name`   <---- i know macOs is not a linux distro 
+- **macOS**: `brew install package_name`   <---- i know macOS is not a linux distro 
 
 ## Prerequisites
 
@@ -48,7 +135,7 @@ sudo pacman -S python python-pip
 # Cargo (for Rust-based tools)
 sudo pacman -S rust
 
-# Go (for Go-based tools)
+# Go (for Go-based tools) - SKIP if not using Go
 sudo pacman -S go
 ```
 
@@ -78,6 +165,15 @@ sudo pacman -S luarocks
 cargo install stylua
 ```
 
+**Go Development (OPTIONAL - skip if you commented out Go configs):**
+```bash
+# Go tools will be installed automatically by gopls
+go install golang.org/x/tools/cmd/goimports@latest
+go install mvdan.cc/gofumpt@latest
+go install github.com/incu6us/goimports-reviser/v3@latest
+go install github.com/segmentio/golines@latest
+```
+
 #### Optional but Recommended
 ```bash
 # Ripgrep for better searching
@@ -103,7 +199,8 @@ mv ~/.local/share/nvim ~/.local/share/nvim.backup
 mv ~/.local/state/nvim ~/.local/state/nvim.backup
 mv ~/.cache/nvim ~/.cache/nvim.backup
 ```
-# About `~/.local/state/nvim`
+
+#### About `~/.local/state/nvim`
 
 Neovim stores **runtime data** in `~/.local/state/nvim`. This includes:
 
@@ -120,9 +217,6 @@ It follows the [XDG spec](https://specifications.freedesktop.org/basedir-spec/ba
 
 Backing up this folder preserves undo history and session info.
 
----
-
-
 ### 2. Clone the Configuration
 ```bash
 # Clone this repository to your Neovim config directory
@@ -132,32 +226,46 @@ git clone <your-repo-url> ~/.config/nvim
 # cp -r /path/to/your/nvim/config ~/.config/nvim
 ```
 
-### 3. Directory Structure Verification
-Ensure your `~/.config/nvim` directory has this structure (my Structure is bad but worked) :
+### 3. Customize Before First Launch (IMPORTANT!)
+
+Before launching Neovim, edit the configuration files to comment out languages/tools you don't need:
+
+```bash
+# Edit these files to comment out unused configurations:
+nvim ~/.config/nvim/lua/configs/lspconfig.lua     # Remove unused LSP servers
+nvim ~/.config/nvim/lua/configs/conform.lua       # Remove unused formatters
+nvim ~/.config/nvim/lua/configs/lint.lua          # Remove unused linters
+nvim ~/.config/nvim/lua/configs/treesitter.lua    # Remove unused parsers
+```
+
+### 4. Directory Structure Verification
+Ensure your `~/.config/nvim` directory has this structure:
 ```
 ~/.config/nvim/
 ├── init.lua
 ├── Installation.md
 ├── lua
-│   ├── chadrc.lua
-│   ├── configs
-│   │   ├── conform.lua
-│   │   ├── lazy.lua
-│   │   ├── lint.lua
-│   │   ├── lspconfig.lua
-│   │   ├── mason-conform.lua
-│   │   ├── mason-lint.lua
-│   │   ├── mason-lspconfig.lua
-│   │   └── treesitter.lua
-│   ├── mappings.lua
-│   ├── options.lua
-│   └── plugins
-│       └── init.lua
-└── Plugins.md
+│   ├── chadrc.lua
+│   ├── configs
+│   │   ├── conform.lua
+│   │   ├── .eslintrc.json
+│   │   ├── lazy.lua
+│   │   ├── lint.lua
+│   │   ├── lspconfig.lua
+│   │   ├── mason-conform.lua
+│   │   ├── mason-lint.lua
+│   │   ├── mason-lspconfig.lua
+│   │   └── treesitter.lua
+│   ├── mappings.lua
+│   ├── options.lua
+│   └── plugins
+│       └── init.lua
+├── .eslintrc.json
+└── .stylua.toml
 ```
 
-### 4. First Launch
-```bash/zsh/fish whatever 
+### 5. First Launch
+```bash
 # Launch Neovim
 nvim
 ```
@@ -169,7 +277,7 @@ On first launch:
 
 **Note:** The first startup might take a few minutes to download and compile everything.
 
-### 5. Post-Installation Setup
+### 6. Post-Installation Setup
 
 #### Verify LSP Servers Installation
 ```bash
@@ -177,8 +285,8 @@ On first launch:
 :Mason
 ```
 
-The following should be installed automatically:
-- **LSP Servers:** lua_ls, clangd, gopls, pyright, ts_ls, html, cssls
+The following should be installed automatically (depending on what you kept enabled):
+- **LSP Servers:** lua_ls, clangd, gopls, pyright, ts_ls, html, cssls, ols
 - **Formatters:** stylua, clang-format, gofumpt, goimports-reviser, golines, black, isort, prettier
 - **Linters:** luacheck, flake8, eslint_d
 
@@ -198,13 +306,14 @@ The following should be installed automatically:
 - **JavaScript/TypeScript:** LSP (ts_ls), formatting (prettier), linting (eslint_d)
 - **HTML:** LSP (html), formatting (prettier)
 - **CSS:** LSP (cssls), formatting (prettier)
+- **Odin:** LSP (ols)
 
 ### Treesitter Syntax Highlighting
-- Bash, C, C++, CMake, Fish, Go, Lua, Make, Markdown, Python, TOML, Vim, YAML, JavaScript, TypeScript, HTML, CSS
+- Bash, C, C++, CMake, Fish, Go, Lua, Make, Markdown, Odin, Python, TOML, Vim, YAML, JavaScript, TypeScript, HTML, CSS
 
 ## Key Features
 
-- **Theme:** Catppuccin with transparency enabled (make sure Terminal Emulator has transparency also enabled , also Font related thinks like Nerd Fonts should be used by terminal)
+- **Theme:** Catppuccin with transparency enabled (make sure Terminal Emulator has transparency also enabled, also Font related things like Nerd Fonts should be used by terminal)
 - **Auto-formatting:** Format on save for all supported languages
 - **Intelligent linting:** Language-specific linters with error checking
 - **LSP integration:** Auto-completion, go-to-definition, diagnostics
@@ -252,6 +361,13 @@ The following should be installed automatically:
 :Lazy install
 ```
 
+#### Mason Installation Errors
+If Mason fails to install tools for languages you don't use:
+1. Open `:Mason`
+2. Find the failing tool (marked with ❌)
+3. Press `X` to uninstall it
+4. Or comment out the tool in your configuration files
+
 ### Getting Help
 - Check `:help` for general Neovim help
 - Use `:checkhealth` to diagnose configuration issues
@@ -275,11 +391,12 @@ nvim -c "Lazy update" -c "qa"
 # Update Mason packages
 nvim -c "MasonUpdate" -c "qa"
 ```
-# Nerd Fonts Installation Guide
+
+## Nerd Fonts Installation Guide
 
 Nerd Fonts are patched fonts with extra icons and glyphs for programming and terminals.
 
-## 1. Choose & Download
+### 1. Choose & Download
 
 Visit [nerdfonts.com/font-downloads](https://www.nerdfonts.com/font-downloads) and pick a font:
 - **FiraCode Nerd Font** - Popular with ligatures
@@ -288,31 +405,31 @@ Visit [nerdfonts.com/font-downloads](https://www.nerdfonts.com/font-downloads) a
 
 Download the `.zip` file and extract all `.ttf` files.
 
-## 2. Install Fonts
+### 2. Install Fonts
 
-### Linux
+#### Linux
 ```bash
 mkdir -p ~/.local/share/fonts
 cp *.ttf ~/.local/share/fonts/
 fc-cache -fv
 ```
 
-### macOS
+#### macOS
 ```bash
 # Double-click font files or use command:
 open *.ttf
 ```
 Then click "Install Font" in Font Book.
 
-### Windows
+#### Windows
 Right-click font files → "Install" or "Install for all users"
 
-## 3. Configure Terminal
+### 3. Configure Terminal
 
-### GUI Method
+#### GUI Method
 Most terminals: **Preferences** → **Font/Appearance** → Select your Nerd Font
 
-### Config Files
+#### Config Files
 
 **Kitty** (`~/.config/kitty/kitty.conf`):
 ```
@@ -354,15 +471,26 @@ config.font = wezterm.font('FiraCode Nerd Font')
     font = FiraCode Nerd Font 12
 ```
 
-## 4. Test Installation
+### 4. Test Installation
 
 Icons should display correctly in:
 - Powerlevel10k prompts (a theme from oh my zsh for nice terminal with zsh)
 - File managers with icons (like yazi)
 - Status bars and dev tools 
 
-## Troubleshooting
+### Troubleshooting
 
 - **Linux**: Check installation with `fc-list | grep "Nerd"`
 - **All platforms**: Restart terminal after installation
 - Verify exact font name in system settings
+
+## Quick Start for Minimal Setup
+
+If you only want Lua support (for Neovim config editing):
+
+1. Install only: `neovim`, `git`, `nodejs`, `npm`, `rust`
+2. Install stylua: `cargo install stylua`
+3. Comment out all other languages in config files
+4. Launch Neovim - only Lua tools will be installed
+
+This gives you a lightweight setup perfect for editing Neovim configurations!
