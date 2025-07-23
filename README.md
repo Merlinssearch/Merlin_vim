@@ -51,7 +51,7 @@ On first launch, plugins will automatically install. This may take a few minutes
 
 ```bash
 # Arch Linux / Manjaro
-sudo pacman -S --needed neovim unzip luarocks xclip wl-clipboard git nodejs npm python python-pip rust
+sudo pacman -S --needed neovim unzip luarocks git nodejs npm python python-pip rust
 
 # Ubuntu/Debian
 sudo apt update && sudo apt install neovim unzip git nodejs npm python3 python3-pip rustc cargo xclip wl-clipboard
