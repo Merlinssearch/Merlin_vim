@@ -41,14 +41,6 @@ On first launch, plugins will automatically install. This may take a few minutes
 - **Node.js & npm** (for LSP servers)
 - **A Nerd Font** (for icons, see [Nerd Fonts section](#-nerd-fonts))
 
-### Package Manager Quick Reference
-Replace `pacman` with your distro's package manager:
-- **Arch/Manjaro**: `pacman -S package_name`
-- **Ubuntu/Debian**: `apt install package_name`
-- **Fedora/RHEL**: `dnf install package_name`
-- **openSUSE**: `zypper install package_name`
-- **macOS**: `brew install package_name`
-
 ### Install Core Dependencies
 
 ```bash
