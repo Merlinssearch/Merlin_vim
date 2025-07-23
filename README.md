@@ -331,7 +331,7 @@ This configuration is open source. Feel free to use and modify as needed.
 - [Lazy.nvim](https://github.com/folke/lazy.nvim) - Plugin manager
 - [Mason](https://github.com/williamboman/mason.nvim) - Tool installer
 - [Catppuccin](https://github.com/catppuccin/nvim) - Color scheme
-- [ProgrammingRainbow]([https://github.com/catppuccin/nvim](https://github.com/ProgrammingRainbow/NvChad-2.5/tree/main)) - nice NvChad 
+- [ProgrammingRainbow](https://github.com/ProgrammingRainbow/NvChad-2.5/tree/main) - nice NvChad config
 ---
 
 **Tested on**: Arch Linux  
