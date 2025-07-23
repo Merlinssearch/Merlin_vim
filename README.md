@@ -1,4 +1,4 @@
-# Merlin's Neovim Configuration (still not finished i need more sleep)
+# Merlin's Neovim Configuration(not finished i need more sleep)
 
 A modern Neovim configuration built on NvChad with LSP, formatting, linting, and syntax highlighting support for multiple programming languages.
 
