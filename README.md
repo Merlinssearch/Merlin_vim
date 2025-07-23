@@ -19,8 +19,7 @@ Different Linux distros use different package managers, but they work similarly.
 - **Fedora/RHEL**: `dnf install package_name`
 - **openSUSE**: `zypper install package_name`
 - **Alpine**: `apk add package_name`
-  
-- **macOS**: `brew install package_name`
+- **macOS**: `brew install package_name`   <---- i know macOs is not a linux distro 
 
 ## Prerequisites
 
