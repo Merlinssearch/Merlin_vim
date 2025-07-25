@@ -1,5 +1,10 @@
 return {
-
+  {
+    "vhyrro/luarocks.nvim",
+    config = true,
+    enabled = true,
+    lazy = false,
+  },
   {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPre", "BufNewFile" },

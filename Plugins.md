@@ -6,7 +6,6 @@ This guide explains how to add, configure, and manage plugins in your NvChad-bas
 
 The configuration uses **Lazy.nvim** as the plugin manager with the following structure:
 
-
 ```
 .
 ├── lua
