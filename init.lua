@@ -36,13 +36,12 @@ local lazy_plugins = {
 
   { import = "plugins" },
 
-  -- Markdown ecosystem
+  --Markdown ecosystem
   {
     "MeanderingProgrammer/markdown.nvim",
     ft = "markdown",
     opts = {},
   },
-
   {
     "lukas-reineke/headlines.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
