@@ -222,9 +222,6 @@ nvim -c "Lazy update" -c "MasonUpdate" -c "qa"
 | Key | Mode | Action |
 |-----|------|--------|
 | `<Space>` | Normal | Leader key |
-| `;` | Normal | Command mode |
-| `jk` | Insert | Escape to normal mode |
-| `<C-s>` | All | Save file (uncomment in mappings.lua) |
 
 More mappings are inherited from NvChad. Check `:help nvchad.mappings`.
 
