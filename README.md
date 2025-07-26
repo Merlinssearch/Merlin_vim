@@ -348,3 +348,7 @@ This configuration is open source. Feel free to use and modify as needed.
 **Should work on**: Any Linux distro, macOS, WSL
 
 If you find solutions for specific distros or encounter issues, please share them in the Issues section to help others! 🚀
+
+
+----------------------------------------------------
+
