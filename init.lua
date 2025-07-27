@@ -3,6 +3,12 @@ vim.g.mapleader = " "
 
 require("configs.autocmds")
 
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.ejs",
+  callback = function()
+    vim.bo.filetype = "html"
+  end,
+})
 -- Bootstrap lazy.nvim BEFORE requiring it
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
