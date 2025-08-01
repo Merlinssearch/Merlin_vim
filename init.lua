@@ -3,6 +3,12 @@ vim.g.mapleader = " "
 
 require("configs.autocmds")
 
+local undodir = vim.fn.stdpath("data") .. "/undodir"
+if vim.fn.isdirectory(undodir) == 0 then
+  vim.fn.mkdir(undodir, "p")
+end
+vim.opt.undodir = undodir
+vim.opt.undofile = true
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*.ejs",
   callback = function()
@@ -86,7 +92,6 @@ local lazy_plugins = {
     end,
   },
 }
-
 -- Setup lazy.nvim mit Plugins und Config
 lazy.setup(lazy_plugins, lazy_config)
 

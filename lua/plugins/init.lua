@@ -1,5 +1,24 @@
 return {
   {
+    "mbbill/undotree", -- ← in einen eigenen Block gepackt!
+    enabled = true,
+    lazy = false,
+    keys = {
+      { "<leader>u", "<cmd>UndotreeToggle<CR>", desc = "Toggle UndoTree" },
+    },
+  },
+  -- NVIMTREE MIT ZEILENNUMMERN - HIER HINZUFÜGEN!
+  {
+    "nvim-tree/nvim-tree.lua",
+    opts = {
+      view = {
+        number = true,
+        relativenumber = true,
+        width = 35,
+      },
+    },
+  },
+  {
     "vhyrro/luarocks.nvim",
     config = true,
     enabled = true,
