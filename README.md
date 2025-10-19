@@ -88,6 +88,7 @@ Install tools for the languages you plan to use:
 #### Python Development
 ```bash
 pip install --user flake8 black isort
+sudo pacman -S python-flake8 python-black python-isort
 ```
 
 #### C/C++ Development
