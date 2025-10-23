@@ -67,6 +67,26 @@ lspconfig.gopls.setup({
   },
 })
 
+lspconfig.jdtls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  -- Optional: Java-spezifische Settings
+  settings = {
+    java = {
+      configuration = {
+        runtimes = {
+          -- Passe den Pfad an deine JDK-Installation an
+          {
+            name = "JavaSE-17",
+            path = "/usr/lib/jvm/java-17-openjdk/", -- Arch Linux Pfad
+            default = true,
+          },
+        },
+      },
+    },
+  },
+})
+
 -- TypeScript/JavaScript server
 lspconfig.ts_ls.setup({
   on_attach = on_attach,
