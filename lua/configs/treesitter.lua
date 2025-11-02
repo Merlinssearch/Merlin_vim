@@ -25,7 +25,6 @@ local options = {
     "typescript",
     "html",
     "css",
-    "java",
   },
 
   highlight = {
