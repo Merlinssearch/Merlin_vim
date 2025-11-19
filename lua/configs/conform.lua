@@ -27,7 +27,7 @@ local options = {
     },
     -- Golang
     ["goimports-reviser"] = {
-      prepend_args = { "-rm-unused" },
+      -- prepend_args = { "-rm-unused" },
     },
     golines = {
       prepend_args = { "--max-len=80" },

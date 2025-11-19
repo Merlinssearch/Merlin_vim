@@ -7,6 +7,10 @@ return {
       { "<leader>u", "<cmd>UndotreeToggle<CR>", desc = "Toggle UndoTree" },
     },
   },
+  {
+    "mfussenegger/nvim-jdtls",
+    ft = "java",
+  },
   -- NVIMTREE MIT ZEILENNUMMERN - HIER HINZUFÜGEN!
   {
     "nvim-tree/nvim-tree.lua",

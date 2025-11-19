@@ -14,6 +14,7 @@ lspconfig.servers = {
   "ts_ls",
   "html",
   "cssls",
+  "jdtls",
 }
 
 -- Helper function to create on_attach that disables formatting
